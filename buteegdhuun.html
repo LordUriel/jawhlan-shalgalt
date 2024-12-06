@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Product Form</title>
+</head>
+<body class="bg-gray-100">
+    <div class="bg-white">
+        <header class="absolute inset-x-0 top-0 z-50 shadow-md">
+            <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <a href="#" class="-m-1.5 p-1.5">
+                        <span class="sr-only">Your Company</span>
+                        <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
+                    </a>
+                </div>
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="./index.html" class="text-sm font-semibold text-gray-900 hover:text-indigo-600">Home</a>
+                    <a href="./buteegdhuun.html" class="text-sm font-semibold text-gray-900 hover:text-indigo-600">Add Product</a>
+                    <a href="./cart.html" class="text-sm font-semibold text-gray-900 hover:text-indigo-600">Cart</a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Form Section -->
+        <div class="flex items-center justify-center min-h-screen">
+            <form id="add-product-form" class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg space-y-4">
+                <h2 class="text-2xl font-bold text-center text-gray-800">Add Product</h2>
+                
+                <div>
+                    <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Enter product name" 
+                        class="input input-bordered w-full" required>
+                </div>
+
+                <div>
+                    <label for="price" class="block text-sm font-medium text-gray-700">Price</label>
+                    <input type="text" id="price" name="price" placeholder="Enter product price" 
+                        class="input input-bordered w-full" required>
+                </div>
+
+                <div>
+                    <label for="info" class="block text-sm font-medium text-gray-700">Info</label>
+                    <input type="text" id="info" name="info" placeholder="Enter product info" 
+                        class="input input-bordered w-full" required>
+                </div>
+
+                <div>
+                    <label for="image" class="block text-sm font-medium text-gray-700">Image URL</label>
+                    <input type="url" id="image" name="image" placeholder="Enter image URL" 
+                        class="input input-bordered w-full" required>
+                </div>
+
+                <div class="flex justify-center">
+                    <button type="submit" class="btn btn-primary w-full">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Function to handle form submission
+        document.getElementById('add-product-form').addEventListener('submit', function(event) {
+            event.preventDefault();  // Prevent the form from submitting normally
+
+            // Collect form data
+            const product = {
+                name: document.getElementById('name').value,
+                price: document.getElementById('price').value,
+                info: document.getElementById('info').value,
+                image: document.getElementById('image').value
+            };
+
+            // Get the existing products from localStorage
+            const products = JSON.parse(localStorage.getItem('products')) || [];
+
+            // Add the new product to the products array
+            products.push(product);
+
+            // Save the updated products array to localStorage
+            localStorage.setItem('products', JSON.stringify(products));
+
+            // Redirect to index.html after adding the product
+            window.location.href = './index.html';
+        });
+    </script>
+</body>
+</html>

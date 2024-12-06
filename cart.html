@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Cart</title>
+</head>
+<body class="bg-gray-100">
+    <div class="bg-white">
+        <header class="absolute inset-x-0 top-0 z-50 shadow-md">
+            <nav class="flex items-center justify-between p-6 lg:px-8" aria-label="Global">
+                <div class="flex lg:flex-1">
+                    <a href="#" class="-m-1.5 p-1.5">
+                        <span class="sr-only">Your Company</span>
+                        <img class="h-8 w-auto" src="https://tailwindui.com/plus/img/logos/mark.svg?color=indigo&shade=600" alt="Logo">
+                    </a>
+                </div>
+                <div class="hidden lg:flex lg:gap-x-12">
+                    <a href="./index.html" class="text-sm font-semibold text-gray-900 hover:text-indigo-600">Home</a>
+                    <a href="./buteegdhuun.html" class="text-sm font-semibold text-gray-900 hover:text-indigo-600">Add Product</a>
+                    <a href="./cart.html" class="text-sm font-semibold text-gray-900 hover:text-indigo-600">Cart <span id="cart-count">0</span></a>
+                </div>
+            </nav>
+        </header>
+
+        <!-- Cart Section -->
+        <div class="flex items-center justify-center min-h-screen">
+            <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg space-y-4" id="cart-items">
+                <h2 class="text-2xl font-bold text-center text-gray-800">Your Cart</h2>
+                <!-- Cart items will be displayed here -->
+            </div>
+        </div>
+
+    </div>
+    <script>
+        // Function to display cart items
+        function displayCartItems() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+            // Clear previous cart items
+            cartItemsContainer.innerHTML = '';
+
+            if (cart.length === 0) {
+                cartItemsContainer.innerHTML = '<p>Your cart is empty.</p>';
+                return;
+            }
+
+            // Loop through cart and display each item
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.classList.add('p-4', 'border-b', 'border-gray-200', 'flex', 'items-center');
+
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-24 h-24 object-cover mr-4">
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-lg">${item.name}</h3>
+                        <p>$${item.price}</p>
+                        <p>${item.info}</p>
+                    </div>
+                    <button class="btn btn-error" data-index="${index}">Remove</button>
+                `;
+
+                // Add the cart item to the container
+                cartItemsContainer.appendChild(cartItem);
+            });
+
+            // Add event listeners to all "Remove" buttons
+            document.querySelectorAll('.btn-error').forEach(button => {
+                button.addEventListener('click', function() {
+                    const productIndex = this.getAttribute('data-index');
+                    removeFromCart(productIndex);
+                });
+            });
+        }
+
+        // Function to handle removing an item from the cart
+        function removeFromCart(index) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            displayCartItems();
+        }
+
+        // Load the cart items when the page loads
+        window.onload = function() {
+            displayCartItems();
+        }
+    </script>
+</body>
+</html>
