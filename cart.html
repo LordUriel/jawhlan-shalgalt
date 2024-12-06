@@ -25,22 +25,22 @@
             </nav>
         </header>
 
-        <!-- Cart Section -->
+        
         <div class="flex items-center justify-center min-h-screen">
             <div class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg space-y-4" id="cart-items">
                 <h2 class="text-2xl font-bold text-center text-gray-800">Your Cart</h2>
-                <!-- Cart items will be displayed here -->
+                
             </div>
         </div>
 
     </div>
     <script>
-        // Function to display cart items
+     
         function displayCartItems() {
             const cartItemsContainer = document.getElementById('cart-items');
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
 
-            // Clear previous cart items
+           
             cartItemsContainer.innerHTML = '';
 
             if (cart.length === 0) {
@@ -48,7 +48,7 @@
                 return;
             }
 
-            // Loop through cart and display each item
+           
             cart.forEach((item, index) => {
                 const cartItem = document.createElement('div');
                 cartItem.classList.add('p-4', 'border-b', 'border-gray-200', 'flex', 'items-center');
@@ -63,11 +63,10 @@
                     <button class="btn btn-error" data-index="${index}">Remove</button>
                 `;
 
-                // Add the cart item to the container
+              
                 cartItemsContainer.appendChild(cartItem);
             });
 
-            // Add event listeners to all "Remove" buttons
             document.querySelectorAll('.btn-error').forEach(button => {
                 button.addEventListener('click', function() {
                     const productIndex = this.getAttribute('data-index');
@@ -76,7 +75,7 @@
             });
         }
 
-        // Function to handle removing an item from the cart
+       
         function removeFromCart(index) {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.splice(index, 1);
@@ -84,7 +83,7 @@
             displayCartItems();
         }
 
-        // Load the cart items when the page loads
+       
         window.onload = function() {
             displayCartItems();
         }
