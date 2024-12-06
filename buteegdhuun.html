@@ -25,7 +25,6 @@
             </nav>
         </header>
 
-        <!-- Form Section -->
         <div class="flex items-center justify-center min-h-screen">
             <form id="add-product-form" class="w-full max-w-md p-6 bg-white rounded-lg shadow-lg space-y-4">
                 <h2 class="text-2xl font-bold text-center text-gray-800">Add Product</h2>
@@ -62,11 +61,11 @@
     </div>
 
     <script>
-        // Function to handle form submission
+     
         document.getElementById('add-product-form').addEventListener('submit', function(event) {
-            event.preventDefault();  // Prevent the form from submitting normally
+            event.preventDefault();  
 
-            // Collect form data
+            
             const product = {
                 name: document.getElementById('name').value,
                 price: document.getElementById('price').value,
@@ -74,16 +73,16 @@
                 image: document.getElementById('image').value
             };
 
-            // Get the existing products from localStorage
+          
             const products = JSON.parse(localStorage.getItem('products')) || [];
 
-            // Add the new product to the products array
+           
             products.push(product);
 
-            // Save the updated products array to localStorage
+          
             localStorage.setItem('products', JSON.stringify(products));
 
-            // Redirect to index.html after adding the product
+           
             window.location.href = './index.html';
         });
     </script>
