@@ -1,18 +1,18 @@
-// Cart array to store the added items
+
 let cart = [];
 
-// Function to update cart count in navbar
+
 function updateCartCount() {
     const cartCount = document.getElementById('cart-count');
     cartCount.textContent = cart.length;
 }
 
-// Function to update the cart items displayed in the "Products in cart" section
+
 function displayCartItems() {
     const cartItemsContainer = document.getElementById('cart-items');
-    cartItemsContainer.innerHTML = ''; // Clear existing items
+    cartItemsContainer.innerHTML = '';
     
-    // Loop through the cart and add each item to the list
+    
     cart.forEach((item, index) => {
         const listItem = document.createElement('li');
         listItem.textContent = `${item.name} - $${item.price}`;
@@ -20,33 +20,33 @@ function displayCartItems() {
     });
 }
 
-// Function to handle adding an item to the cart
+
 function addToCart(item) {
     cart.push(item);
     updateCartCount();
     displayCartItems();
 }
 
-// Function to handle deleting an item from the cart
+
 function deleteItem(itemIndex) {
-    cart.splice(itemIndex, 1); // Remove the item at the specified index
+    cart.splice(itemIndex, 1); 
     updateCartCount();
     displayCartItems();
 }
 
-// Function to handle the "Buy Now" button (For simplicity, just log the purchase)
+
 function buyNow() {
     if (cart.length === 0) {
         alert("Your cart is empty!");
     } else {
         alert("Thank you for your purchase!");
-        cart = []; // Empty the cart after purchase
+        cart = []; 
         updateCartCount();
         displayCartItems();
     }
 }
 
-// Handle "Add to Cart" button click
+
 document.addEventListener('DOMContentLoaded', function() {
     const addToCartButton = document.getElementById('add-to-cart-btn');
     if (addToCartButton) {
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle "Delete" button click
+   
     const deleteButton = document.getElementById('delete-btn');
     if (deleteButton) {
         deleteButton.addEventListener('click', function() {
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Handle "Buy Now" button click
+   
     const buyNowButton = document.getElementById('buy-now-btn');
     if (buyNowButton) {
         buyNowButton.addEventListener('click', function() {
