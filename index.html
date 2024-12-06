@@ -25,32 +25,32 @@
             </nav>
         </header>
 
-        <!-- Display Products -->
+      
         <div class="flex items-center justify-center min-h-screen">
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="product-list">
-                <!-- Products will be added here dynamically -->
+               
             </div>
         </div>
 
     </div>
 
     <script>
-        // Function to update cart count in navbar
+       
         function updateCartCount() {
             const cartCount = document.getElementById('cart-count');
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             cartCount.textContent = cart.length;
         }
 
-        // Function to display products from localStorage
+        
         function displayProducts() {
             const productList = document.getElementById('product-list');
             const products = JSON.parse(localStorage.getItem('products')) || [];
 
-            // Clear previous product list
+          
             productList.innerHTML = '';
 
-            // Loop through products and display them
+           
             products.forEach((product, index) => {
                 const productCard = document.createElement('div');
                 productCard.classList.add('card', 'bg-base-100', 'shadow-xl');
@@ -69,11 +69,11 @@
                     </div>
                 `;
                 
-                // Append the product card to the list
+               
                 productList.appendChild(productCard);
             });
 
-            // Add event listeners to all "Add to Cart" buttons
+          
             document.querySelectorAll('.add-to-cart-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const productIndex = this.getAttribute('data-index');
@@ -81,7 +81,7 @@
                 });
             });
 
-            // Add event listeners to all "Edit" buttons
+            
             document.querySelectorAll('.edit-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const productIndex = this.getAttribute('data-index');
@@ -89,7 +89,7 @@
                 });
             });
 
-            // Add event listeners to all "Delete" buttons
+           
             document.querySelectorAll('.delete-btn').forEach(button => {
                 button.addEventListener('click', function() {
                     const productIndex = this.getAttribute('data-index');
@@ -98,7 +98,7 @@
             });
         }
 
-        // Function to handle adding a product to the cart
+        
         function addToCart(product) {
             const cart = JSON.parse(localStorage.getItem('cart')) || [];
             cart.push(product);
@@ -106,48 +106,48 @@
             updateCartCount();
         }
 
-        // Function to handle editing a product
+       
         function editProduct(index) {
             const products = JSON.parse(localStorage.getItem('products')) || [];
             const product = products[index];
 
-            // Prompt the user to edit product details
+            
             const newName = prompt("Edit Product Name", product.name);
             const newPrice = prompt("Edit Product Price", product.price);
             const newInfo = prompt("Edit Product Info", product.info);
             const newImage = prompt("Edit Product Image URL", product.image);
 
             if (newName && newPrice && newInfo && newImage) {
-                // Update the product details
+              
                 product.name = newName;
                 product.price = newPrice;
                 product.info = newInfo;
                 product.image = newImage;
 
-                // Save updated product in localStorage
+                
                 products[index] = product;
                 localStorage.setItem('products', JSON.stringify(products));
 
-                // Re-render the product list
+               
                 displayProducts();
                 alert("Product updated successfully!");
             }
         }
 
-        // Function to handle deleting a product
+        
         function deleteProduct(index) {
             const products = JSON.parse(localStorage.getItem('products')) || [];
-            products.splice(index, 1); // Remove product from array
+            products.splice(index, 1); 
 
-            // Save updated products list in localStorage
+            
             localStorage.setItem('products', JSON.stringify(products));
 
-            // Re-render the product list
+            
             displayProducts();
             alert("Product deleted successfully!");
         }
 
-        // Load the products and cart count on page load
+        
         window.onload = function() {
             displayProducts();
             updateCartCount();
